@@ -19,6 +19,9 @@
     --background-other-color: #2E2F42;
     --background-other-color-2: #E7E9FC;
     --main-background-color: #FFFFFF;
+    --transition-color: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bg-color: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-shadow: 
 }
 
 p, h1, h2, h3, h4, h5, h6 {
@@ -101,13 +104,27 @@ body {
     color: var(--accent-color);
 }
 
+
+.accent::after {
+    content: '';
+    /* width: 48px; */
+    height: 4px;
+    background-color: #404BBF;
+    border-radius: 2px;
+    display: flex;
+    margin-top: 24px;
+    /* flex-grow: 1; */
+}
+
+
 .site-nav  {
     display: flex;
 }
 
 .list-nav {
     padding-top: 24px;
-    padding-bottom: 24px;
+    /* padding-bottom: 24px; */
+    
 }
 
 .list-nov-head {
@@ -124,12 +141,14 @@ body {
     font-weight: 500;
     font-size: 16px;
     line-height: 1.5;
+    transition: var(--transition-color);
 }
 
 
 .site-nav a:hover, .site-nav a:focus {
     color: var(--accent-color);
 }
+
 
 
 .auth-nav {
@@ -141,6 +160,7 @@ body {
     font-size: 16px;
     line-height: 1.5;
     color: var(--second-text-color);
+    transition: var(--transition-color);
 }
 .auth-nav a:hover,
 .auth-nav a:focus {
@@ -205,6 +225,8 @@ body {
     display: block;
     margin-left: auto;
     margin-right: auto;
+
+    transition: var(--transition-bg-color);
 }
 
 .button:hover,
@@ -321,6 +343,7 @@ body {
     justify-content: center;
     align-items: center;
     background-color: var(--accent-color);
+    transition: var(--transition-bg-color);
 }
 
 .employees-to-link:is(:hover, :focus) { 
@@ -373,6 +396,7 @@ body {
 
 .customers-icon {
     fill: currentColor;
+    transition: var(--transition-color);
 }
 
 
@@ -443,6 +467,7 @@ body {
     justify-content: center;
     align-items: center;
     background-color: rgba(255, 255, 255, 0.1);
+    transition: var(--transition-bg-color);
 }
 
 .footer-to-link:is(:hover, :focus) {
@@ -493,6 +518,8 @@ body {
     padding: 12px 24px;
     border: 1px solid #E7E9FC;
     border-radius: 4px;
+
+    transition: var(--transition-bg-color);
 }
 
 .button-filter:hover, .button-filter:focus {
@@ -529,6 +556,7 @@ body {
 .li-icon {
     margin-right: 24px;
     margin-bottom: 48px;
+    
 }
 /* .li-icon:last-child {
     margin-bottom: 0px;
@@ -542,8 +570,9 @@ body {
     margin-right: 0px;
 }
 
-
-
+.li-icon:is(:hover , :focus) .project-animation{
+    transform: translateY(0);
+}
 
 
 .project {
@@ -555,6 +584,26 @@ body {
     margin-bottom: 8px;
     margin-left: 16px; */
 }
+
+.project-animation-wrap {
+    position: relative;
+    overflow: hidden;
+}
+
+.project-animation {
+    position: absolute;
+    top: 0;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    padding: 40px 32px;
+    color: var(--color-button-filter);
+    background-color: var(--accent-color);
+    height: 100%;
+    transform: translateY(100%);
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 
 .text-portfolio {
     color: var(--second-text-color);
@@ -589,3 +638,68 @@ body {
     border-bottom: 0.5px solid #F4F4FD;
     border-left: 0.5px solid #F4F4FD;
 }
+
+
+.backdrop {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(46, 47, 66, 0.4);
+    transition: opacity 300ms linear, visibility 300ms linear;
+
+
+   
+}
+
+.btn-close-opet {
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: #E7E9FC;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin-left: auto;
+    padding: 0px;
+}
+
+.btn-close-opet:is(:hover, :focus) {
+    background-color: var(--color-button-filter-hover);
+}
+
+.btn-close-opet:is(:hover, :focus) .svg-close{
+    fill: #ffffff;
+}
+ 
+.modal {
+    width: 408px;
+    min-height: 576px;
+    background-color: #FCFCFC;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14),
+        0px 1px 3px rgba(0, 0, 0, 0.12),
+        0px 2px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 4px; 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(360deg);
+    padding: 24px;
+    transition: transform 0.5s linear;
+}
+
+.backdrop.is-hidden .modal {
+    transform: translate(-500%, -50%) rotate(0deg) ;
+
+}
+
+/* -----------------JAVA-script--------------------- */
+.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+/* ---------------------------------------------------- */
+
